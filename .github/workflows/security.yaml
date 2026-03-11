@@ -1,0 +1,10 @@
+name: Security workflow
+on: ["push"]
+
+jobs:
+  Secrets-Scanning:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Print message
+        run: echo "Hellow world"
