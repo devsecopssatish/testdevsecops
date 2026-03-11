@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Install and Run Gitleaks 
         run: |
-          wget -qO gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.23.3/gitleaks_8.23.3_linux_arm64.tar.gz
+          wget -qO gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_linux_x64.tar.gz
           tar -xvf gitleaks.tar.gz
           chmod +x gitleaks
           mv gitleaks /usr/local/bin/gitleaks
