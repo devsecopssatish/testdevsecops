@@ -8,7 +8,10 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      - name: Print message
-        run: echo "Hellow world"
-      - name: List directory
-        run: ls -al
+      - name: Install and Run Gitleaks 
+        run: |
+          wget -qO gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/download/v8.23.3/gitleaks_8.23.3_linux_arm64.tar.gz
+          tar -xvf gitleaks.tar.gz
+          chmod +x gitleaks
+          mv gitleaks /usr/local/bin/gitleaks
+          gitleaks detect -s . -f json -r secrets-scanning-results.json
