@@ -1,0 +1,32 @@
+name: Dependency Scanning
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  dependency-scanning:
+    name: Dependency Scan (Trivy)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    container:
+      image: aquasec/trivy:canary
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Trivy dependency scan
+        run: |
+          trivy --exit-code 1 repository . \
+          --scanners vuln \
+          -s CRITICAL,HIGH \
+          -f json \
+          -o trivy-scan-report.json
+
+      - name: Upload Trivy report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trivy-scan-report
+          path: trivy-scan-report.json
